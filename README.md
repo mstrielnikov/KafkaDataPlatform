@@ -16,3 +16,5 @@ Security:
 
 Utilities:
 * Kowl
+* Offset explorer
+* [Redpanda](https://docs.redpanda.com/docs/get-started/quick-start/?quickstart=docker#bring-up-a-docker-compose-file)
