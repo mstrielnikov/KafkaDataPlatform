@@ -1,0 +1,12 @@
+---
+- name: Start kafka server, if not started
+  service:
+    name: kafka
+    state: started
+    
+# - name: Start kafka server, if not started
+#   service:
+#     name: confluent-kafka.service
+#     state: started
+
+...
