@@ -32,6 +32,19 @@ module "ec2_cluster_kafka" {
   
   ssh_key_pair_name      = aws_key_pair.key_pair_ansible.key_name
 
+  root_block_device_map = {
+    volume_type           = "gp3"
+    volume_size           = 10
+    delete_on_termination = true
+  }
+  
+  ebs_block_device_map = {
+    device_name = "/dev/sdb"
+    volume_type = "gp3"
+    volume_size = 20
+    encrypted   = true
+  }
+
   user_data = templatefile("./user_data.tpl", {
         ebs_disk_mount_path = "/dev/sdb"
         ebs_disk_path       = "/mnt/data"

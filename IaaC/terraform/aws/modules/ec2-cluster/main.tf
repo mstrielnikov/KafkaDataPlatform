@@ -46,8 +46,19 @@ resource "aws_instance" "instance" {
     cpu_credits = "unlimited"
   }
 
-  /* root_block_device */
-  /* ebs_block_device */
+  root_block_device {
+    volume_type           = var.root_block_device_map.volume_type
+    volume_size           = var.root_block_device_map.volume_size
+    delete_on_termination = var.root_block_device_map.delete_on_termination
+  }
+  
+  ebs_block_device {
+    device_name = var.ebs_block_device_map.device_name
+    volume_type = var.ebs_block_device_map.volume_type
+    volume_size = var.ebs_block_device_map.volume_size
+    encrypted   = var.ebs_block_device_map.encrypted
+  }
+
   
   key_name = var.ssh_key_pair_name
 

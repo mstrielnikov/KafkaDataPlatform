@@ -43,7 +43,6 @@ variable "interface_subnet_cidr" {
   type = string
 }
 
-
 variable "create_eip" {
   description = ""
   type = bool
@@ -59,6 +58,25 @@ variable "monitorng" {
 variable "ssh_key_pair_name" {
   description = "SSH key pair name"
   type = string
+}
+
+variable "root_block_device_map" {
+  type = map(string)
+  default = map({
+    volume_type           = "gp3"
+    volume_size           = 10
+    delete_on_termination = true
+  })
+}
+
+variable "ebs_block_device_map" {
+  type = map(string)
+  default = map({
+    device_name = "/dev/sdb"
+    volume_type = "gp3"
+    volume_size = 20
+    encrypted   = true
+  })
 }
 
 variable "user_data" {
