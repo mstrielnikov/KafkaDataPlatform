@@ -1,0 +1,7 @@
+---
+defaults_kafka_service_name: "kafka"
+defaults_kafka_restart_wait_time: 10
+defaults_kafka_listener_port: 9092
+defaults_kafka_host: "localhost"
+
+...

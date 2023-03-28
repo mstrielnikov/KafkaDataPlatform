@@ -1,0 +1,35 @@
+---
+- name: "Stop Kafka service"
+  service:
+    name: "{{ kafka_service_name }}"
+    state: stopped
+  notify: start_kafka
+
+- name: Wait for Kafka brokers to stop
+  wait_for:
+    port: {{ kafka_listener_port }}
+    state: stopped
+  ignore_errors: yes
+
+- name: "Ensure Kafka main pid has been killed"
+  wait_for:
+    path: "/var/run/{{ kafka_service_name }}.pid"
+    state: absent
+    timeout: "{{ kafka_restart_wait_time }}"
+
+- name: "Ensure all Kafka pids are killed"
+  shell: |
+    {{kafka_system_path}}/bin/kafka-server-stop
+
+# - name: Restart kafka service
+#   shell: >
+#     source {{ kafka_user }}/.profile_kafka 
+#     && nohup {{ kafka_user }}/bin/kafka-server-start {{ kafka_system_path }}/confluent/etc/kafka/server.properties
+
+- name: Start Kafka service
+  service:
+    name: "{{ kafka_service_name }}"
+    state: started
+  notify: check_kafka
+
+...

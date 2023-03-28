@@ -1,0 +1,6 @@
+---
+kafka_service_name: "{{ kafka_service_name | default(defaults_kafka_service_name) }}"
+kafka_restart_wait_time: "{{ kafka_restart_wait_time | default(defaults_kafka_restart_wait_time) }}"
+kafka_listener_port: "{{ kafka_listener_port | default(defaults_kafka_listener_port) }}"
+kafka_host: "{{ kafka_host | default(defaults_kafka_host) }}"
+...

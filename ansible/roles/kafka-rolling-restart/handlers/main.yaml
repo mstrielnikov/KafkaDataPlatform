@@ -1,0 +1,18 @@
+---
+- name: start_kafka
+  service:
+    name: "{{ kafka_service_name }}"
+    state: started
+
+- name: check_kafka
+  shell: >
+    kafka-broker-api-versions.sh --bootstrap-server {{kafka_host}}:{{kafka_listener_port}}
+
+
+- name: wait_for_kafka
+  wait_for:
+    port: {{ kafka_listener_port }}
+    state: started
+    timeout: "{{ kafka_restart_wait_time }}"
+
+...
