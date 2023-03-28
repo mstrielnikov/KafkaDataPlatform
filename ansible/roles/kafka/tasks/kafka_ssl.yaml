@@ -1,0 +1,30 @@
+---
+- name: Create SSL keystore and truststore
+  openssl_pkcs12:
+    path: /etc/kafka/ssl/keystore.p12
+    privatekey_path: /etc/kafka/ssl/kafka.key
+    cert_path: /etc/kafka/ssl/kafka.crt
+    passphrase: "{{ kafka_ssl_keystore_password }}"
+    state: present
+  register: keystore_result
+
+- name: Create SSL truststore
+  openssl_crl:
+    path: /etc/kafka/ssl/truststore.jks
+    crl_path: /etc/kafka/ssl/ca.crt
+    passphrase: "{{ kafka_ssl_truststore_password }}"
+    state: present
+  register: truststore_result
+
+- name: Copy SSL files to Kafka brokers
+  copy:
+    src: "{{ item }}"
+    dest: /etc/kafka/ssl/
+    owner: kafka
+    group: kafka
+    mode: 0600
+  with_items:
+    - files/kafka.server.keystore.jks
+    - files/kafka.server.truststore.jks
+    - files/kafka.client.truststore.jks
+  notify: restart_kafka

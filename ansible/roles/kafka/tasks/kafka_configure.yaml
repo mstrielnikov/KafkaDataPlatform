@@ -1,0 +1,7 @@
+- name: Configure Kafka
+  template:
+    src: "templates/server.properties.j2"
+    dest: "/opt/kafka_{{ kafka_version }}/config/server.properties"
+
+- name: Start Kafka
+  command: "/opt/kafka_{{ kafka_version }}/bin/kafka-server-start.sh /opt/kafka_{{ kafka_version }}/config/server.properties"
