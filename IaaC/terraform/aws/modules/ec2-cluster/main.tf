@@ -47,16 +47,18 @@ resource "aws_instance" "instance" {
   }
 
   root_block_device {
-    volume_type           = var.root_block_device_map.volume_type
-    volume_size           = var.root_block_device_map.volume_size
-    delete_on_termination = var.root_block_device_map.delete_on_termination
+    for_each var.ebs_block_device_map
+    volume_type           = lookup(var.root_block_device_map.value, "volume_type")
+    volume_size           = lookup(var.root_block_device_map.value, "volume_size")
+    delete_on_termination = lookup(var.root_block_device_map.value, "delete_on_termination")
   }
   
   ebs_block_device {
-    device_name = var.ebs_block_device_map.device_name
-    volume_type = var.ebs_block_device_map.volume_type
-    volume_size = var.ebs_block_device_map.volume_size
-    encrypted   = var.ebs_block_device_map.encrypted
+    for_each var.ebs_block_device_map
+    device_name = lookup(var.ebs_block_device_map.value, "device_name")
+    volume_type = lookup(var.ebs_block_device_map.value, "volume_type")
+    volume_size = lookup(var.ebs_block_device_map.value, "volume_size")
+    encrypted   = lookup(var.ebs_block_device_map.value, "encrypted")
   }
 
   
