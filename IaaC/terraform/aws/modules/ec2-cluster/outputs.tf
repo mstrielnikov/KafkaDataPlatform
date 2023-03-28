@@ -1,4 +1,5 @@
 # Output the Kafka broker IPs
-output "kafka_brokers" {
-  value = aws_instance.kafka_instance.*.private_ip
+output "instances_ips_list" {
+  value = aws_instance.instance.*.private_ip
 }
+
