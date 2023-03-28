@@ -1,0 +1,26 @@
+---
+# Java/Scala dependencies versioning
+scala_version: "{{ scala_version | default(defaults_scala_version) }}"
+java_version: "{{ java_version | default(defaults_java_version) }}"
+
+# Confluent 
+confluent_version: "{{ confluent_version | default(defaults_confluent_version) }}"
+confluent_platform_oss_version: "{{ confluent_platform_oss_version | default(defaults_confluent_platform_oss_version) }}"
+
+# Kafka versioning
+kafka_version: "{{ kafka_version | default(defaults_kafka_version) }}" 
+
+# Kafka system settings
+kafka_system_path: "{{ kafka_system_path | default(defaults_kafka_system_path) }}"
+kafka_system_user: "{{ kafka_system_user | default(defaults_kafka_system_user) }}"
+
+# Kafka configs
+kafka_log_dir: "{{ kafka_log_dir | default(defaults_kafka_log_dir) }}"
+
+# Kafka SSL/TLS
+kafka_tls_inter_broker: "{{ kafka_tls_inter_broker | default(defaults_kafka_tls_inter_broker) }}"
+kafka_auth_client_tls: "{{ kafka_auth_client_tls | default(defaults_kafka_auth_client_tls) }}"
+kafka_ssl_keystore_password: ""
+kafka_ssl_truststore_password: ""
+
+...

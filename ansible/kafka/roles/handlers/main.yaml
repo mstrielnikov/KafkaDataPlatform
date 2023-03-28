@@ -1,8 +1,0 @@
----
-- name: Restart kafka service
-  shell: >
-    {{kafka_path}}/bin/kafka-server-stop
-    && source ~/.profile_kafka 
-    && nohup /home-to-path/confluent/bin/kafka-server-start /home-to-path/confluent/etc/kafka/server.properties
-
-...

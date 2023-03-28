@@ -1,0 +1,24 @@
+---
+# Default Java/Scala dependencies versioning
+defaults_scala_version: 
+defaults_java_version: 
+
+# Confluent 
+defaults_confluent_version: "6.2.0"
+defaults_confluent_platform_oss_version: "2.13"
+
+# Default Kafka versioning
+defaults_kafka_version: "3.0"
+
+# Default Kafka system settings
+defaults_kafka_system_path:
+defaults_kafka_system_user:
+
+# Default Kafka configs
+defaults_kafka_log_dir: "/mnt/data"
+
+# Defaults Kafka SSL/TLS
+defaults_kafka_tls_inter_broker: "PLAINTEXT"
+defaults_kafka_auth_client_tls: "PLAINTEXT"
+
+...

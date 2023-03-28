@@ -1,0 +1,19 @@
+---
+
+- name: Install Confluent Platform public key
+  apt_key:
+    url: "https://packages.confluent.io/deb/{{ confluent_version }}/archive.key"
+    state: present
+
+- name: Add Confluent Platform repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://packages.confluent.io/deb/{{ confluent_version }} stable main"
+    state: present
+    filename: confluent.list
+
+- name: Install Confluent Platform
+  apt:
+    name: confluent-platform-oss-2.13
+    state: present
+
+...
