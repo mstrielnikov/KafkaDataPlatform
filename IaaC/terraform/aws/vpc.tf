@@ -13,7 +13,7 @@ resource "aws_vpc" "confluent_cloud_vpc" {
 resource "aws_subnet" "confluent_cloud_subnet" {
   cidr_block        = "10.0.1.0/24"
   vpc_id            = aws_vpc.confluent_cloud_vpc.id
-  availability_zone = 
+  /* availability_zone =  */
 }
 
 
