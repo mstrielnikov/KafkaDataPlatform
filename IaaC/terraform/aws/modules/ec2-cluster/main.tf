@@ -46,14 +46,14 @@ resource "aws_instance" "instance" {
     cpu_credits = "unlimited"
   }
 
-  root_block_device {
+  dynamic root_block_device {
     for_each var.ebs_block_device_map
     volume_type           = lookup(var.root_block_device_map.value, "volume_type")
     volume_size           = lookup(var.root_block_device_map.value, "volume_size")
     delete_on_termination = lookup(var.root_block_device_map.value, "delete_on_termination")
   }
   
-  ebs_block_device {
+  dynamic ebs_block_device {
     for_each var.ebs_block_device_map
     device_name = lookup(var.ebs_block_device_map.value, "device_name")
     volume_type = lookup(var.ebs_block_device_map.value, "volume_type")
@@ -61,7 +61,6 @@ resource "aws_instance" "instance" {
     encrypted   = lookup(var.ebs_block_device_map.value, "encrypted")
   }
 
-  
   key_name = var.ssh_key_pair_name
 
   # User data script to bootstrap instances
