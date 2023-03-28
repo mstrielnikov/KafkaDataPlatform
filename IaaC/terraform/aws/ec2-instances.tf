@@ -24,8 +24,9 @@ module "ec2_cluster_kafka" {
   ami                    = data.aws_ami.ubuntu.id
 
   vpc_id                 = aws_vpc.kafka_cloud_vpc.id
-  vpc_subnet_id          = aws_subnet.confluent_cloud_subnet.id
   vpc_security_group_ids = [ aws_security_group.kafka_cloud_sg.id ]
+  subnet_id              = aws_subnet.confluent_cloud_subnet.id
+  subnet_interface_cidr  = "10.0.1.0"
   create_eip             = true
   monitoring             = true
   
@@ -36,8 +37,7 @@ module "ec2_cluster_kafka" {
         ebs_disk_path       = "/mnt/data"
     })
 
-  tags = merge(
-    {
+  tags = merge({
       app    = "kafka",
     }, var.default_tags)
 }

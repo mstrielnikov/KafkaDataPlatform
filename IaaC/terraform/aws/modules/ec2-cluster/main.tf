@@ -22,8 +22,9 @@ resource "aws_iam_instance_profile" "instance_profile" {
 }
 
 resource "aws_network_interface" "interface" {
+  count           = var.instance_count
   subnet_id       = var.subnet_id
-  private_ips     = [ "10.0.0.50" ]
+  private_ips     = [ "${cidrhost(var.interface_subnet_cidr, count.index+1)}" ]
   security_groups = [ var.vpc_security_group_ids ]
 }
 
@@ -32,12 +33,12 @@ resource "aws_instance" "instance" {
   count                  = var.instance_count
   ami                    = var.ami
   instance_type          = var.instance_type
-  subnet_id              = var.vpc_subnet_id
+  subnet_id              = var.subnet_id
   vpc_security_group_ids = var.vpc_security_group_ids
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.id
 
   network_interface {
-    network_interface_id = aws_network_interface.interface.id
+    network_interface_id = aws_network_interface.interface[count.index].id
     device_index         = 0
   }
 

@@ -28,21 +28,28 @@ variable "vpc_id" {
   type = string  
 }
 
+variable "vpc_security_group_ids" {
+  description = "List of security groups"
+  type = list(string) 
+}
+
 variable "subnet_id" {
   description = "AWS VPC subnet id"
   type = string  
 }
 
-variable "vpc_security_group_ids" {
-  description = "List of security groups"
-  type = list(string) 
+variable "interface_subnet_cidr" {
+  description = "AWS EC2 instance network interface cidr"
+  type = string
 }
+
 
 variable "create_eip" {
   description = ""
   type = bool
   default = teue
 }
+
 variable "monitorng" {
   description = "Enable AWS monitoring"
   type = string
