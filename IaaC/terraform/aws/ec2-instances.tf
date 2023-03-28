@@ -24,7 +24,7 @@ module "ec2_cluster_kafka" {
   ami                    = data.aws_ami.ubuntu.id
 
   vpc_id                 = aws_vpc.kafka_cloud_vpc.id
-  vpc_subnet_id          = data.aws_subnet.confluent_cloud_subnet_id
+  vpc_subnet_id          = aws_subnet.confluent_cloud_subnet.id
   vpc_security_group_ids = [ aws_security_group.kafka_cloud_sg.id ]
   create_eip             = true
   monitoring             = true

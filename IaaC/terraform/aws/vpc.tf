@@ -17,10 +17,6 @@ resource "aws_subnet" "confluent_cloud_subnet" {
 }
 
 
-data "aws_subnet" "confluent_cloud_subnet_id" {
-  id = aws_subnet.confluent_cloud_subnet.id
-}
-
 # Multi-zone configuration
 /* resource "aws_subnet" "confluent_cloud_subnet" {
   count = 3
